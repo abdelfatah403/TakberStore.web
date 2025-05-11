@@ -1,10 +1,8 @@
 import Breadcrumps from "@/components/common/breadcrumps";
 
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 import ProductProp from "./ProductProp";
-import AddTOCartButton from "@/components/common/AddTOCartButton";
 import MayLike from "@/components/common/MayLike";
 
 const SpicifecProduct = () => {

@@ -6,10 +6,9 @@ type fields = {
   htmlFor: string;
   name: string;
   placeholder: string;
-  type?: string;
   id: string;
 };
-const PasswordInputs = ({ htmlFor, name, placeholder, type, id }: fields) => {
+const PasswordInputs = ({ htmlFor, name, placeholder, id }: fields) => {
   const [password, ShowPassword] = useState(false);
   const changePassword = () => ShowPassword(!password);
 
