@@ -122,9 +122,7 @@ type CategoryPageProps = {
 };
 
 // Export metadata for the page (optional but recommended)
-export async function generateMetadata({
-  params,
-}: CategoryPageProps): Promise<Metadata> {
+export function generateMetadata({ params }: CategoryPageProps): Metadata {
   return {
     title: `${params.categoryid} Category`,
     description: `Browse our ${params.categoryid} collection`,
@@ -186,8 +184,12 @@ export default function CategoryPage({ params }: CategoryPageProps) {
               <SelectItem value="Top Rated">Top Rated</SelectItem>
               <SelectItem value="Name A to Z">Name A to Z</SelectItem>
               <SelectItem value="Name Z to A">Name Z to A</SelectItem>
-              <SelectItem value="Price high to low">Price high to low</SelectItem>
-              <SelectItem value="Price low to high">Price low to high</SelectItem>
+              <SelectItem value="Price high to low">
+                Price high to low
+              </SelectItem>
+              <SelectItem value="Price low to high">
+                Price low to high
+              </SelectItem>
               <SelectItem value="New">New</SelectItem>
             </SelectContent>
           </Select>
