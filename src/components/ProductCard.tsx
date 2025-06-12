@@ -2,6 +2,7 @@ import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
 import { Product } from "@/types/product";
 import { Heart } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
@@ -9,13 +10,15 @@ export default function ProductCard({ product }: { product: Product }) {
       <Heart size={30} className="text-pink absolute end-4 top-4" />
       {/* <CardHeader> */}
       {/* <CardDescription> */}
-      <Image
-        className="w-full rounded-lg mb-4 shadow-lg"
-        src="/towels1.webp"
-        width={200}
-        height={10}
-        alt="towel"
-      />
+      <Link href={`/SpeceficProduct/${product.id}`}>
+        <Image
+          className="w-full rounded-lg mb-4 shadow-lg"
+          src="/towels1.webp"
+          width={200}
+          height={10}
+          alt="towel"
+        />
+      </Link>
       {/* </CardDescription> */}
       {/* </CardHeader> */}
       <CardContent>
