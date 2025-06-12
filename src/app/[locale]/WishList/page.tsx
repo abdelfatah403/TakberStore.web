@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { usePathname } from "next/navigation";
 import {
   Select,
   SelectContent,
@@ -117,12 +116,6 @@ type WishListProps = {
 };
 
 const WishList = ({ params }: WishListProps) => {
-  // Unwrap params with React.use()
-  const unwrappedParams = React.use(params);
-  const { locale } = unwrappedParams;
-  
-  const pathname = usePathname();
-  const category = pathname.split("/").pop();
   const [selectedSortMethod, setSelectedSortMethod] =
     useState<string>("Top Rated");
   const [values, setValues] = useState([0, 100]);
@@ -151,12 +144,6 @@ const WishList = ({ params }: WishListProps) => {
       setProductsColors(colors);
     });
   }, []);
-
-  useEffect(() => {
-    // Optional: Use locale if needed for translations
-    console.log(`Current locale: ${locale}`);
-  }, [locale]);
-
   
   return (
     <>
