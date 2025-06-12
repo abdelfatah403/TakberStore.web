@@ -1,27 +1,27 @@
-import AuthBotton from "@/components/common/AuthBotton";
-import InputFields from "@/components/common/inputFields";
-import PasswordInputs from "@/components/common/PasswordInputs";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import AuthBotton from '@/components/common/AuthBotton'
+import InputFields from '@/components/common/inputFields'
+import PasswordInputs from '@/components/common/PasswordInputs'
+import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
 
-const Signup = () => {
+const Login = () => {
   return (
     <>
       <div className="container flex justify-center">
         <div className="bg-[#FFF4FB] w-[500px] h-[600px] my-24 rounded-lg">
           <h3 className="mt-6 font-[600] text-[20px] text-[#AB0A76] flex justify-center">
-            Create an account
+          Welcome Back!
           </h3>
           <div className="flex space-x-1 mt-3 justify-center">
             <span className="font-[600] text-[16px] leading-[100%] text-[#898989]">
-              Already have an account?
+            Don’t have an account?
             </span>
             <Link
               className="font-[600] text-[16px] leading-[100%] text-[#AB0A76]"
-              href={"/Login"}
+              href={"/Signup"}
             >
-              Login
+              Sign up
             </Link>
           </div>
           <div>
@@ -44,10 +44,7 @@ const Signup = () => {
           <div className="container flex space-x-1 mt-3">
             <input type="checkbox" />
             <p className="font-[400] text-[16px] text-[#464646]">
-              I agree to the{" "}
-              <span className="font-[400] text-[16px] text-[#AB0A76]">
-                terms and conditions and privacy policy
-              </span>
+            Remember me
             </p>
           </div>
           <p className="items-center mt-4 justify-center flex font-[500] text-[#AB0A76] 
@@ -58,15 +55,15 @@ const Signup = () => {
             before:w-16 sm:before:w-20 md:before:w-28 
             before:h-[1px] before:items-center before:flex before:me-2 sm:before:me-3 
             before:content-[''] before:bg-[#DB9BC6]">
-            Or Sign up using
+            Or Login using
           </p>
-          <Image src={'svg/google-color-svgrepo-com.svg'} width={40} height={40} alt="google image" className="mx-auto mt-6">
+          <Image src={'../svg/google-color-svgrepo-com.svg'} width={40} height={40} alt="google image" className="mx-auto mt-6">
           </Image>
-          <AuthBotton name="Sign up"/>
+          <AuthBotton name="Login"/>
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Login

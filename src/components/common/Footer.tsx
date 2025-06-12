@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Phone } from "lucide-react";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -6,22 +7,20 @@ export default function Footer() {
       <div className="container mx-auto px-3 sm:px-4 md:px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           <div className="grid grid-cols-2 gap-2 sm:gap-4">
-            <div className="self-center text-base sm:text-lg md:text-xl font-bold">LOGO</div>
+            <Link href={'/'} className="self-center text-base sm:text-lg md:text-xl font-bold">LOGO</Link>
             <div className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold space-y-2 sm:space-y-3 md:space-y-4">
-              <ul className="space-y-2 sm:space-y-3 md:space-y-4">
-                <li className="hover:opacity-80 cursor-pointer transition-opacity">Pajama</li>
-                <li className="hover:opacity-80 cursor-pointer transition-opacity">Underwear</li>
-                <li className="hover:opacity-80 cursor-pointer transition-opacity">Slippers</li>
-                <li className="hover:opacity-80 cursor-pointer transition-opacity">Abaya</li>
+              <ul className="space-y-2 sm:space-y-3 md:space-y-4 flex flex-col ">
+                <Link href={'/category/Pajama'} className="hover:opacity-80 cursor-pointer transition-opacity">Pajama</Link>
+                <Link href={'/category/Underwear'} className="hover:opacity-80 cursor-pointer transition-opacity">Underwear</Link>
+                <Link href={'/category/Slippers'} className="hover:opacity-80 cursor-pointer transition-opacity">Slippers</Link>
+                <Link href={'/category/Abaya'} className="hover:opacity-80 cursor-pointer transition-opacity">Abaya</Link>
               </ul>
             </div>
           </div>
           <div className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold mt-4 sm:mt-0">
-            <ul className="space-y-2 sm:space-y-3 md:space-y-4">
-              <li className="hover:opacity-80 cursor-pointer transition-opacity">FAQ</li>
-              <li className="hover:opacity-80 cursor-pointer transition-opacity">Contact Us</li>
-              <li className="hover:opacity-80 cursor-pointer transition-opacity">Refund and Return Policy</li>
-              <li className="hover:opacity-80 cursor-pointer transition-opacity">Discover</li>
+            <ul className="space-y-2 sm:space-y-3 md:space-y-4 flex flex-col">
+              <Link href={'/ContactUs'} className="hover:opacity-80 cursor-pointer transition-opacity">Contact Us</Link>
+              <Link href={'/Refund'} className="hover:opacity-80 cursor-pointer transition-opacity">Refund and Return Policy</Link>
             </ul>
           </div>
           <div className="text-xs sm:text-sm md:text-base lg:text-lg space-y-2 sm:space-y-3 md:space-y-4 mt-4 lg:mt-0">

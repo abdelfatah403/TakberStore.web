@@ -1,0 +1,93 @@
+{
+    "greeting": "Hello",
+    "welcome": "Welcome to our site",
+    "login": "Please log in to continue.",
+    "logout": "You have successfully logged out.",
+    "navigation": {
+        "newItems": "New Items",
+        "hotDeals": "Hot Deals",
+        "pajamas": "Pajamas",
+        "summerPajamas": "Summer Pajamas",
+        "winterPajamas": "Winter Pajamas",
+        "underwear": "Underwear",
+        "panties": "Panties",
+        "bras": "Bras",
+        "lingerie": "Lingerie",
+        "slippers": "Slippers",
+        "abaya": "Abaya"
+    },
+    "header": {
+        "slogan": "Sleep in Style Dream in Comfort",
+        "buyNow": "Buy Now",
+        "searchPlaceholder": "Search for products..."
+    },
+    "account": {
+        "signIn": "Sign In",
+        "signUp": "Sign Up",
+        "createAccount": "Create an account",
+        "alreadyHaveAccount": "Already have an account?",
+        "forgotPassword": "Forgot password?",
+        "resetPassword": "Reset Password",
+        "profile": "Profile",
+        "settings": "Settings",
+        "myOrders": "My Orders"
+    },
+    "cart": {
+        "yourCart": "Your Cart",
+        "empty": "Your cart is empty",
+        "checkout": "Checkout",
+        "continueShopping": "Continue Shopping",
+        "total": "Total",
+        "subtotal": "Subtotal",
+        "shipping": "Shipping",
+        "tax": "Tax",
+        "remove": "Remove"
+    },
+    "product": {
+        "addToCart": "Add to Cart",
+        "addToWishlist": "Add to Wishlist",
+        "outOfStock": "Out of Stock",
+        "size": "Size",
+        "color": "Color",
+        "quantity": "Quantity",
+        "description": "Description",
+        "reviews": "Reviews",
+        "relatedProducts": "Related Products"
+    },
+    "form": {
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "name": "Name",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "address": "Address",
+        "city": "City",
+        "country": "Country",
+        "phoneNumber": "Phone Number",
+        "required": "This field is required",
+        "termsConditions": "I agree to the terms and conditions and privacy policy"
+    },
+    "error": {
+        "network": "Network error, please try again later.",
+        "not_found": "The requested resource was not found.",
+        "unauthorized": "You are not authorized to access this resource."
+    },
+    "success": {
+        "data_saved": "Your data has been saved successfully.",
+        "profile_updated": "Your profile has been updated."
+    },
+    "loading": "Loading, please wait...",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "search": "Search",
+    "wishlist": "Wishlist",
+    "footer": {
+        "aboutUs": "About Us",
+        "contactUs": "Contact Us",
+        "termsOfService": "Terms of Service",
+        "privacyPolicy": "Privacy Policy",
+        "returnsRefunds": "Returns & Refunds",
+        "copyright": "© 2023 Takber. All rights reserved."
+    }
+}

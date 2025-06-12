@@ -9,6 +9,12 @@ const Collection = () => {
     { image: "/sliper.png", title: "Slippers" },
     { image: "/abaya.png", title: "abaya" },
   ];
+  const links = [
+    "/category/pajamas",
+    "/category/underwear",
+    "/category/slippers",
+    "/category/abaya",
+  ];
 
   return (
     <>
@@ -17,7 +23,7 @@ const Collection = () => {
       </h2>
       <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10 lg:gap-28 mt-10">
         {collection.map((item, index) => (
-          <Link href={""} key={index}>
+          <Link href={links[index]} key={index}>
             <div className="flex justify-center gap-6 flex-col items-center size-56 rounded-md p-2 mb-10 md:mb-16 lg:mb-20 shadow-xl shadow-[#CACACA40] backdrop-blur-md bg-white/30">
               <Image
                 src={item.image}

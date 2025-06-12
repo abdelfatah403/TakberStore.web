@@ -1,6 +1,6 @@
 "use client";
+import React from 'react'
 import { usePathname } from "next/navigation";
-import "./categoryPage.css";
 import {
   Select,
   SelectContent,
@@ -10,11 +10,11 @@ import {
 } from "@/components/ui/select";
 import { useEffect, useState } from "react";
 import { Product } from "@/types/product";
-import ProductCard from "@/components/ProductCard";
 import { Color } from "@/types/color";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DualRangeSlider } from "@/components/ui/DualRangeSlider";
 import { Button } from "@/components/ui/button";
+import ProductCard from '@/components/ProductCard';
 
 const data = {
   products: [
@@ -109,44 +109,47 @@ const sizes = [
   "Larger (L)",
   "X-Larger (XL)",
 ];
-
 const brands = ["Dummy", "Dummy", "Dummy", "Dummy"];
 
-export default function CategoryPage() {
-  const pathname = usePathname();
-  const category = pathname.split("/").pop();
-  const [selectedSortMethod, setSelectedSortMethod] =
-    useState<string>("Top Rated");
-  const [values, setValues] = useState([0, 100]);
-  const [products, setProducts] = useState<Product[]>([]);
-  const [productsColors, setProductsColors] = useState<Color[]>([]);
 
-  const handleSortChange = (value: string) => {
-    setSelectedSortMethod(value);
-  };
-
-  useEffect(() => {
-    // get products
-    const products = data.products;
-
-    // set products array
-    setProducts(products);
-
-    // map colors
-    const colors: Color[] = [];
-    products.forEach((product) => {
-      product.colors.forEach((color) => {
-        if (!colors.find((c) => c.name === color.name)) {
-          colors.push(color);
-        }
-      });
-      setProductsColors(colors);
-    });
-  }, []);
-
+const WishList = () => {
+     const pathname = usePathname();
+      const category = pathname.split("/").pop();
+      const [selectedSortMethod, setSelectedSortMethod] =
+        useState<string>("Top Rated");
+      const [values, setValues] = useState([0, 100]);
+      const [products, setProducts] = useState<Product[]>([]);
+      const [productsColors, setProductsColors] = useState<Color[]>([]);
+    
+      const handleSortChange = (value: string) => {
+        setSelectedSortMethod(value);
+      };
+    
+      useEffect(() => {
+        // get products
+        const products = data.products;
+    
+        // set products array
+        setProducts(products);
+    
+        // map colors
+        const colors: Color[] = [];
+        products.forEach((product) => {
+          product.colors.forEach((color) => {
+            if (!colors.find((c) => c.name === color.name)) {
+              colors.push(color);
+            }
+          });
+          setProductsColors(colors);
+        });
+      }, []);
   return (
     <>
-      {/* Page Header */}
+       <div className="bg-[#8c0e71] h-12 flex items-center justify-center">
+        <h1 className="text-white navFont">Wishlist</h1>
+      </div>
+
+       {/* Page Header */}
       <div className="page-header mb-8 md:mb-14">
         <h1 className="text-center text-white text-2xl md:text-3xl">
           {category?.toUpperCase()}
@@ -275,6 +278,11 @@ export default function CategoryPage() {
           </div>
         </div>
       </div>
+
+      
+
     </>
-  );
+  )
 }
+
+export default WishList
