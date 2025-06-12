@@ -15,6 +15,7 @@ import { Color } from "@/types/color";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DualRangeSlider } from "@/components/ui/DualRangeSlider";
 import { Button } from "@/components/ui/button";
+import { ArrowDownNarrowWide, ArrowUpNarrowWide } from "lucide-react";
 
 const data = {
   products: [
@@ -131,6 +132,38 @@ const SubCategoryid = ({ params }: SubCategoryPageProps) => {
   const [values, setValues] = useState([0, 100]);
   const [products, setProducts] = useState<Product[]>([]);
   const [productsColors, setProductsColors] = useState<Color[]>([]);
+  const [closed, setClosed] = useState(false);
+
+  const toggleFilter = () => {
+    setClosed(!closed);
+    console.log(`Filter toggled: ${!closed}`);
+  };
+
+  useEffect(() => {
+    // Handle initial screen size and resize events
+    const handleResize = () => {
+      // Close the filter on mobile and tablet screens (below 1024px)
+      if (window.innerWidth < 1024) {
+        setClosed(true);
+      } else {
+        setClosed(false);
+      }
+    };
+
+    // Set initial state based on screen size
+    if (typeof window !== "undefined") {
+      handleResize();
+    }
+
+    // Add resize listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []); // Empty dependency array is correct here since we only want this to run once on mount
+
 
   const handleSortChange = (value: string) => {
     setSelectedSortMethod(value);
@@ -169,8 +202,19 @@ const SubCategoryid = ({ params }: SubCategoryPageProps) => {
       </div>
       {/* Container */}
       <div className="container px-4 md:px-6">
+        <button
+          onClick={toggleFilter}
+          className="lg:hidden bg-brightPink flex font-semibold justify-center items-center text-black w-full px-4 py-2 rounded-md"
+        >
+          <span className="me-2 border-2 border-pink-500 p-[2px] rounded-md">
+            {closed ? <ArrowUpNarrowWide /> : <ArrowDownNarrowWide/>}
+          </span>
+          Filter
+        </button>
         {/* Sorting */}
-        <div className="flex flex-col sm:flex-row justify-end items-start sm:items-center mb-4 gap-2 text-base md:text-xl">
+        <div className={`flex flex-col mt-4 ${
+            closed ? "hidden" : "sm:flex-row"
+          } justify-end items-start sm:items-center mb-4 gap-2 text-base md:text-xl`}>
           <Select onValueChange={handleSortChange}>
             <SelectTrigger className="w-full sm:max-w-[210px]">
               <SelectValue placeholder="Sort by" />
@@ -191,7 +235,9 @@ const SubCategoryid = ({ params }: SubCategoryPageProps) => {
         <p className="text-end text-[#464646] mb-4 md:mb-8">{"2050"} Result</p>
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
           {/* Filters */}
-          <div className="col-span-1 bg-brightPink p-4 md:p-6 lg:p-9 rounded-lg self-start lg:sticky lg:top-0">
+          <div className={`col-span-1 ${
+              closed ? "hidden" : "sm:flex-row"
+            }  bg-brightPink p-4 md:p-6 lg:p-9 rounded-lg self-start lg:sticky lg:top-0`}>
             <h3 className="text-xl md:text-2xl font-semibold">Filter</h3>
             <div className="mt-4 md:mt-6">
               <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">
