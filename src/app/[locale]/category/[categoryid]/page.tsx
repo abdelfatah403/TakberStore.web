@@ -1,5 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
+import React, { use, useEffect, useState } from "react";
 import "./categoryPage.css";
 import {
   Select,
@@ -8,14 +9,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useEffect, useState } from "react";
 import { Product } from "@/types/product";
 import ProductCard from "@/components/ProductCard";
 import { Color } from "@/types/color";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DualRangeSlider } from "@/components/ui/DualRangeSlider";
 import { Button } from "@/components/ui/button";
-import React from "react";
 
 const data = {
   products: [
@@ -114,17 +113,20 @@ export const sizes = [
 export const brands = ["Dummy", "Dummy", "Dummy", "Dummy"];
 
 type CategoryPageProps = {
-  params: {
+  params: Promise<{
     locale: string;
     categoryid: string;
-  };
+  }>;
 };
 
 // Make sure to use the correct props type
 export default function CategoryPage({ params }: CategoryPageProps) {
-  // Use the locale and categoryid from params
+  // Unwrap params with React.use()
+  const unwrappedParams = React.use(params);
+  const { locale, categoryid } = unwrappedParams;
+
   const pathname = usePathname();
-  const category = pathname.split("/").pop() || params.categoryid;
+  const category = pathname.split("/").pop() || categoryid;
   const [selectedSortMethod, setSelectedSortMethod] =
     useState<string>("Top Rated");
   const [values, setValues] = useState([0, 100]);
@@ -153,9 +155,8 @@ export default function CategoryPage({ params }: CategoryPageProps) {
       setProductsColors(colors);
     });
 
-    // You could use locale here if needed for translations
-    console.log(`Current locale: ${params.locale}`);
-  }, [params.locale]);
+    console.log(`Current locale: ${locale}`);
+  }, [locale]);
 
   return (
     <>

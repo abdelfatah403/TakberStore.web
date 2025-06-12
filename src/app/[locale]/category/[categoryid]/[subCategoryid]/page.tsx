@@ -1,4 +1,5 @@
 "use client";
+import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import "./specCategory.css";
 import {
@@ -8,7 +9,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useEffect, useState } from "react";
 import { Product } from "@/types/product";
 import ProductCard from "@/components/ProductCard";
 import { Color } from "@/types/color";
@@ -111,171 +111,191 @@ const sizes = [
 ];
 
 const brands = ["Dummy", "Dummy", "Dummy", "Dummy"];
-const SubCategoryid = () => {
- const pathname = usePathname();
-   const category = pathname.split("/").pop();
-   const [selectedSortMethod, setSelectedSortMethod] =
-     useState<string>("Top Rated");
-   const [values, setValues] = useState([0, 100]);
-   const [products, setProducts] = useState<Product[]>([]);
-   const [productsColors, setProductsColors] = useState<Color[]>([]);
- 
-   const handleSortChange = (value: string) => {
-     setSelectedSortMethod(value);
-   };
- 
-   useEffect(() => {
-     // get products
-     const products = data.products;
- 
-     // set products array
-     setProducts(products);
- 
-     // map colors
-     const colors: Color[] = [];
-     products.forEach((product) => {
-       product.colors.forEach((color) => {
-         if (!colors.find((c) => c.name === color.name)) {
-           colors.push(color);
-         }
-       });
-       setProductsColors(colors);
-     });
-   }, []);
- 
-   return (
-     <>
-       {/* Page Header */}
-       <div className="page-header mb-8 md:mb-14">
-         <h1 className="text-center text-white text-2xl md:text-3xl">
-           {category?.toUpperCase()}
-         </h1>
-       </div>
-       {/* Container */}
-       <div className="container px-4 md:px-6">
-         {/* Sorting */}
-         <div className="flex flex-col sm:flex-row justify-end items-start sm:items-center mb-4 gap-2 text-base md:text-xl">
-           <Select onValueChange={handleSortChange}>
-             <SelectTrigger className="w-full sm:max-w-[210px]">
-               <SelectValue placeholder="Sort by" />
-             </SelectTrigger>
-             <SelectContent>
-               <SelectItem value="Recommended">Recommended</SelectItem>
-               <SelectItem value="Top Rated">Top Rated</SelectItem>
-               <SelectItem value="Name A to Z">Name A to Z</SelectItem>
-               <SelectItem value="Name Z to A">Name Z to A</SelectItem>
-               <SelectItem value="Price high to low">Price high to low</SelectItem>
-               <SelectItem value="Price low to high">Price low to high</SelectItem>
-               <SelectItem value="New">New</SelectItem>
-             </SelectContent>
-           </Select>
-           <h3 className="text-sm sm:text-base">{selectedSortMethod}</h3>
-         </div>
-         {/* Results count */}
-         <p className="text-end text-[#464646] mb-4 md:mb-8">{"2050"} Result</p>
-         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-           {/* Filters */}
-           <div className="col-span-1 bg-brightPink p-4 md:p-6 lg:p-9 rounded-lg self-start lg:sticky lg:top-0">
-             <h3 className="text-xl md:text-2xl font-semibold">Filter</h3>
-             <div className="mt-4 md:mt-6">
-               <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">Color</h4>
-               <div className="flex gap-3 md:gap-4 flex-wrap">
-                 {productsColors.map((color) => (
-                   <label
-                     key={color.name}
-                     className="flex flex-col items-center gap-1 md:gap-2 w-1/4 sm:w-1/6 lg:w-1/4"
-                   >
-                     <input
-                       type="checkbox"
-                       className="hidden"
-                       onChange={() => {
-                         console.log(`color ${color.name} clicked`);
-                       }}
-                     />
-                     <div
-                       style={{ backgroundColor: color.hex }}
-                       className="h-3 w-3 md:h-4 md:w-4 rounded-full shadow"
-                     ></div>
-                     <p className="text-xs md:text-sm">{color.name}</p>
-                   </label>
-                 ))}
-               </div>
-             </div>
-             <div className="mt-4 md:mt-6">
-               <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">Size</h4>
-               <div className="flex flex-col gap-3 md:gap-4 flex-wrap">
-                 {sizes.map((size) => (
-                   <div
-                     key={Math.random()}
-                     className="flex items-center space-x-2"
-                   >
-                     <Checkbox id={size} />
-                     <label
-                       htmlFor={size}
-                       className="text-xs md:text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                     >
-                       {size}
-                     </label>
-                   </div>
-                 ))}
-               </div>
-             </div>
-             <div className="mt-4 md:mt-6">
-               <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">Brand</h4>
-               <div className="flex flex-col gap-3 md:gap-4 flex-wrap">
-                 {brands.map((brand) => (
-                   <div
-                     key={Math.random()}
-                     className="flex items-center space-x-2"
-                   >
-                     <Checkbox id={brand} />
-                     <label
-                       htmlFor={brand}
-                       className="text-xs md:text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                     >
-                       {brand}
-                     </label>
-                   </div>
-                 ))}
-               </div>
-             </div>
-             <div className="mt-4 md:mt-6">
-               <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">Price Range</h4>
-               <DualRangeSlider
-                 label={(value) => (
-                   <span className="text-nowrap text-xs md:text-sm">{value} LE</span>
-                 )}
-                 value={values}
-                 onValueChange={setValues}
-                 min={0}
-                 max={100}
-                 step={1}
-                 labelPosition="bottom"
-                 className="text-xs md:text-sm"
-               />
-             </div>
-             {/* filter buttons */}
-             <div className="flex justify-between mt-8 md:mt-16">
-               <Button
-                 variant="outline"
-                 className="bg-transparent border-pink text-pink text-sm md:text-base"
-               >
-                 Clear
-               </Button>
-               <Button className="bg-pink text-sm md:text-base">Apply</Button>
-             </div>
-           </div>
-           {/* Products section */}
-           <div className="col-span-1 lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-             {/* Product Card */}
-             {products.map((product) => (
-               <ProductCard key={product.id} product={product} />
-             ))}
-           </div>
-         </div>
-       </div>
-     </>
-   );
-}
+type SubCategoryPageProps = {
+  params: Promise<{
+    locale: string;
+    categoryid: string;
+    subCategoryid: string;
+  }>;
+};
 
-export default SubCategoryid
+const SubCategoryid = ({ params }: SubCategoryPageProps) => {
+  // Unwrap params with React.use()
+  const unwrappedParams = React.use(params);
+  const { locale, categoryid, subCategoryid } = unwrappedParams;
+
+  const pathname = usePathname();
+  const category = pathname.split("/").pop();
+  const [selectedSortMethod, setSelectedSortMethod] =
+    useState<string>("Top Rated");
+  const [values, setValues] = useState([0, 100]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [productsColors, setProductsColors] = useState<Color[]>([]);
+
+  const handleSortChange = (value: string) => {
+    setSelectedSortMethod(value);
+  };
+
+  useEffect(() => {
+    // get products
+    const products = data.products;
+
+    // set products array
+    setProducts(products);
+
+    // map colors
+    const colors: Color[] = [];
+    products.forEach((product) => {
+      product.colors.forEach((color) => {
+        if (!colors.find((c) => c.name === color.name)) {
+          colors.push(color);
+        }
+      });
+      setProductsColors(colors);
+    });
+    // Optional: Use locale if needed for translations
+    console.log(
+      `Current locale: ${locale}, category: ${categoryid}, subcategory: ${subCategoryid}`
+    );
+  }, [locale, categoryid, subCategoryid]);
+
+  return (
+    <>
+      {/* Page Header */}
+      <div className="page-header mb-8 md:mb-14">
+        <h1 className="text-center text-white text-2xl md:text-3xl">
+          {category?.toUpperCase()}
+        </h1>
+      </div>
+      {/* Container */}
+      <div className="container px-4 md:px-6">
+        {/* Sorting */}
+        <div className="flex flex-col sm:flex-row justify-end items-start sm:items-center mb-4 gap-2 text-base md:text-xl">
+          <Select onValueChange={handleSortChange}>
+            <SelectTrigger className="w-full sm:max-w-[210px]">
+              <SelectValue placeholder="Sort by" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Recommended">Recommended</SelectItem>
+              <SelectItem value="Top Rated">Top Rated</SelectItem>
+              <SelectItem value="Name A to Z">Name A to Z</SelectItem>
+              <SelectItem value="Name Z to A">Name Z to A</SelectItem>
+              <SelectItem value="Price high to low">Price high to low</SelectItem>
+              <SelectItem value="Price low to high">Price low to high</SelectItem>
+              <SelectItem value="New">New</SelectItem>
+            </SelectContent>
+          </Select>
+          <h3 className="text-sm sm:text-base">{selectedSortMethod}</h3>
+        </div>
+        {/* Results count */}
+        <p className="text-end text-[#464646] mb-4 md:mb-8">{"2050"} Result</p>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+          {/* Filters */}
+          <div className="col-span-1 bg-brightPink p-4 md:p-6 lg:p-9 rounded-lg self-start lg:sticky lg:top-0">
+            <h3 className="text-xl md:text-2xl font-semibold">Filter</h3>
+            <div className="mt-4 md:mt-6">
+              <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">
+                Color
+              </h4>
+              <div className="flex gap-3 md:gap-4 flex-wrap">
+                {productsColors.map((color) => (
+                  <label
+                    key={color.name}
+                    className="flex flex-col items-center gap-1 md:gap-2 w-1/4 sm:w-1/6 lg:w-1/4"
+                  >
+                    <input
+                      type="checkbox"
+                      className="hidden"
+                      onChange={() => {
+                        console.log(`color ${color.name} clicked`);
+                      }}
+                    />
+                    <div
+                      style={{ backgroundColor: color.hex }}
+                      className="h-3 w-3 md:h-4 md:w-4 rounded-full shadow"
+                    ></div>
+                    <p className="text-xs md:text-sm">{color.name}</p>
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="mt-4 md:mt-6">
+              <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">
+                Size
+              </h4>
+              <div className="flex flex-col gap-3 md:gap-4 flex-wrap">
+                {sizes.map((size) => (
+                  <div key={Math.random()} className="flex items-center space-x-2">
+                    <Checkbox id={size} />
+                    <label
+                      htmlFor={size}
+                      className="text-xs md:text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      {size}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="mt-4 md:mt-6">
+              <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">
+                Brand
+              </h4>
+              <div className="flex flex-col gap-3 md:gap-4 flex-wrap">
+                {brands.map((brand) => (
+                  <div key={Math.random()} className="flex items-center space-x-2">
+                    <Checkbox id={brand} />
+                    <label
+                      htmlFor={brand}
+                      className="text-xs md:text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      {brand}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="mt-4 md:mt-6">
+              <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">
+                Price Range
+              </h4>
+              <DualRangeSlider
+                label={(value) => (
+                  <span className="text-nowrap text-xs md:text-sm">
+                    {value} LE
+                  </span>
+                )}
+                value={values}
+                onValueChange={setValues}
+                min={0}
+                max={100}
+                step={1}
+                labelPosition="bottom"
+                className="text-xs md:text-sm"
+              />
+            </div>
+            {/* filter buttons */}
+            <div className="flex justify-between mt-8 md:mt-16">
+              <Button
+                variant="outline"
+                className="bg-transparent border-pink text-pink text-sm md:text-base"
+              >
+                Clear
+              </Button>
+              <Button className="bg-pink text-sm md:text-base">Apply</Button>
+            </div>
+          </div>
+          {/* Products section */}
+          <div className="col-span-1 lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* Product Card */}
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default SubCategoryid;

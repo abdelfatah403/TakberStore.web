@@ -1,5 +1,5 @@
 "use client";
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import { usePathname } from "next/navigation";
 import {
   Select,
@@ -8,7 +8,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useEffect, useState } from "react";
 import { Product } from "@/types/product";
 import { Color } from "@/types/color";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -111,38 +110,54 @@ const sizes = [
 ];
 const brands = ["Dummy", "Dummy", "Dummy", "Dummy"];
 
+type WishListProps = {
+  params: Promise<{
+    locale: string;
+  }>;
+};
 
-const WishList = () => {
-     const pathname = usePathname();
-      const category = pathname.split("/").pop();
-      const [selectedSortMethod, setSelectedSortMethod] =
-        useState<string>("Top Rated");
-      const [values, setValues] = useState([0, 100]);
-      const [products, setProducts] = useState<Product[]>([]);
-      const [productsColors, setProductsColors] = useState<Color[]>([]);
-    
-      const handleSortChange = (value: string) => {
-        setSelectedSortMethod(value);
-      };
-    
-      useEffect(() => {
-        // get products
-        const products = data.products;
-    
-        // set products array
-        setProducts(products);
-    
-        // map colors
-        const colors: Color[] = [];
-        products.forEach((product) => {
-          product.colors.forEach((color) => {
-            if (!colors.find((c) => c.name === color.name)) {
-              colors.push(color);
-            }
-          });
-          setProductsColors(colors);
-        });
-      }, []);
+const WishList = ({ params }: WishListProps) => {
+  // Unwrap params with React.use()
+  const unwrappedParams = React.use(params);
+  const { locale } = unwrappedParams;
+  
+  const pathname = usePathname();
+  const category = pathname.split("/").pop();
+  const [selectedSortMethod, setSelectedSortMethod] =
+    useState<string>("Top Rated");
+  const [values, setValues] = useState([0, 100]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [productsColors, setProductsColors] = useState<Color[]>([]);
+
+  const handleSortChange = (value: string) => {
+    setSelectedSortMethod(value);
+  };
+
+  useEffect(() => {
+    // get products
+    const products = data.products;
+
+    // set products array
+    setProducts(products);
+
+    // map colors
+    const colors: Color[] = [];
+    products.forEach((product) => {
+      product.colors.forEach((color) => {
+        if (!colors.find((c) => c.name === color.name)) {
+          colors.push(color);
+        }
+      });
+      setProductsColors(colors);
+    });
+  }, []);
+
+  useEffect(() => {
+    // Optional: Use locale if needed for translations
+    console.log(`Current locale: ${locale}`);
+  }, [locale]);
+
+  
   return (
     <>
        <div className="bg-[#8c0e71] h-12 flex items-center justify-center">
