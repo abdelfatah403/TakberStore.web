@@ -122,12 +122,12 @@ type CategoryPageProps = {
 };
 
 // Export metadata for the page (optional but recommended)
-export function generateMetadata({ params }: CategoryPageProps): Metadata {
-  return {
-    title: `${params.categoryid} Category`,
-    description: `Browse our ${params.categoryid} collection`,
-  };
-}
+// export function generateMetadata({ params }: CategoryPageProps): Metadata {
+//   return {
+//     title: `${params.categoryid} Category`,
+//     description: `Browse our ${params.categoryid} collection`,
+//   };
+// }
 
 // Make sure to use the correct props type
 export default function CategoryPage({ params }: CategoryPageProps) {
