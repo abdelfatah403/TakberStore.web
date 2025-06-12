@@ -16,7 +16,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { DualRangeSlider } from "@/components/ui/DualRangeSlider";
 import { Button } from "@/components/ui/button";
 import React from "react";
-import { Metadata } from "next";
 
 const data = {
   products: [
@@ -121,19 +120,11 @@ type CategoryPageProps = {
   };
 };
 
-// Export metadata for the page (optional but recommended)
-// export function generateMetadata({ params }: CategoryPageProps): Metadata {
-//   return {
-//     title: `${params.categoryid} Category`,
-//     description: `Browse our ${params.categoryid} collection`,
-//   };
-// }
-
 // Make sure to use the correct props type
 export default function CategoryPage({ params }: CategoryPageProps) {
-  const { locale, categoryid } = params;
+  // Use the locale and categoryid from params
   const pathname = usePathname();
-  const category = pathname.split("/").pop();
+  const category = pathname.split("/").pop() || params.categoryid;
   const [selectedSortMethod, setSelectedSortMethod] =
     useState<string>("Top Rated");
   const [values, setValues] = useState([0, 100]);
@@ -161,7 +152,10 @@ export default function CategoryPage({ params }: CategoryPageProps) {
       });
       setProductsColors(colors);
     });
-  }, []);
+
+    // You could use locale here if needed for translations
+    console.log(`Current locale: ${params.locale}`);
+  }, [params.locale]);
 
   return (
     <>
