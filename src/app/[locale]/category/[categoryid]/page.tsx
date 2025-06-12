@@ -15,6 +15,7 @@ import { Color } from "@/types/color";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DualRangeSlider } from "@/components/ui/DualRangeSlider";
 import { Button } from "@/components/ui/button";
+import { brands, sizes } from "@/lib/sizes";
 
 const data = {
   products: [
@@ -102,15 +103,7 @@ const data = {
   ],
 };
 
-export const sizes = [
-  "X-Small (XS)",
-  "Small (S)",
-  "Medium (M)",
-  "Larger (L)",
-  "X-Larger (XL)",
-];
 
-export const brands = ["Dummy", "Dummy", "Dummy", "Dummy"];
 
 type CategoryPageProps = {
   params: Promise<{
