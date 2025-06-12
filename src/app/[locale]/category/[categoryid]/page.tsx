@@ -15,6 +15,8 @@ import { Color } from "@/types/color";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DualRangeSlider } from "@/components/ui/DualRangeSlider";
 import { Button } from "@/components/ui/button";
+import React from "react";
+import { Metadata } from "next";
 
 const data = {
   products: [
@@ -112,7 +114,26 @@ export const sizes = [
 
 export const brands = ["Dummy", "Dummy", "Dummy", "Dummy"];
 
-export default function CategoryPage() {
+type CategoryPageProps = {
+  params: {
+    locale: string;
+    categoryid: string;
+  };
+};
+
+// Export metadata for the page (optional but recommended)
+export async function generateMetadata({
+  params,
+}: CategoryPageProps): Promise<Metadata> {
+  return {
+    title: `${params.categoryid} Category`,
+    description: `Browse our ${params.categoryid} collection`,
+  };
+}
+
+// Make sure to use the correct props type
+export default function CategoryPage({ params }: CategoryPageProps) {
+  const { locale, categoryid } = params;
   const pathname = usePathname();
   const category = pathname.split("/").pop();
   const [selectedSortMethod, setSelectedSortMethod] =
@@ -179,7 +200,9 @@ export default function CategoryPage() {
           <div className="col-span-1 bg-brightPink p-4 md:p-6 lg:p-9 rounded-lg self-start lg:sticky lg:top-0">
             <h3 className="text-xl md:text-2xl font-semibold">Filter</h3>
             <div className="mt-4 md:mt-6">
-              <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">Color</h4>
+              <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">
+                Color
+              </h4>
               <div className="flex gap-3 md:gap-4 flex-wrap">
                 {productsColors.map((color) => (
                   <label
@@ -203,7 +226,9 @@ export default function CategoryPage() {
               </div>
             </div>
             <div className="mt-4 md:mt-6">
-              <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">Size</h4>
+              <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">
+                Size
+              </h4>
               <div className="flex flex-col gap-3 md:gap-4 flex-wrap">
                 {sizes.map((size) => (
                   <div
@@ -222,7 +247,9 @@ export default function CategoryPage() {
               </div>
             </div>
             <div className="mt-4 md:mt-6">
-              <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">Brand</h4>
+              <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">
+                Brand
+              </h4>
               <div className="flex flex-col gap-3 md:gap-4 flex-wrap">
                 {brands.map((brand) => (
                   <div
@@ -241,10 +268,14 @@ export default function CategoryPage() {
               </div>
             </div>
             <div className="mt-4 md:mt-6">
-              <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">Price Range</h4>
+              <h4 className="text-lg md:text-xl font-medium mb-3 md:mb-4">
+                Price Range
+              </h4>
               <DualRangeSlider
                 label={(value) => (
-                  <span className="text-nowrap text-xs md:text-sm">{value} LE</span>
+                  <span className="text-nowrap text-xs md:text-sm">
+                    {value} LE
+                  </span>
                 )}
                 value={values}
                 onValueChange={setValues}
