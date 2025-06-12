@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import React, { useState } from "react";
 import SideBarMobile from "./SideBarMobile";
@@ -11,7 +10,7 @@ import { useRouter, usePathname } from "next/navigation";
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const { locale, setLocale } = useTranslationStore();
+  const { setLocale } = useTranslationStore();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -21,10 +20,10 @@ const NavBar = () => {
 
   const toggleLanguage = () => {
     // Get current locale from path
-    const currentLocale = pathname.split('/')[1];
+    const currentLocale = pathname.split("/")[1];
     // Determine new locale
-    const newLocale = currentLocale === 'en' ? 'ar' : 'en';
-    
+    const newLocale = currentLocale === "en" ? "ar" : "en";
+
     // Update store
     setLocale(newLocale);
     router.push(`/${newLocale}${pathname.substring(3)}`);
@@ -39,10 +38,16 @@ const NavBar = () => {
           </Link>
           <div className="hidden lg:flex items-center space-x-6">
             <ul className="flex gap-6 text-white">
-              <Link href="/category/new-Item" className="navFont hover:text-pink-200 transition-colors">
+              <Link
+                href="/category/new-Item"
+                className="navFont hover:text-pink-200 transition-colors"
+              >
                 New Items
               </Link>
-              <Link href="/category/hot-deals" className="navFont hover:text-pink-200 transition-colors">
+              <Link
+                href="/category/hot-deals"
+                className="navFont hover:text-pink-200 transition-colors"
+              >
                 Hot Deals
               </Link>
               <DropDown
@@ -71,7 +76,10 @@ const NavBar = () => {
             </ul>
           </div>
           <div className="flex items-center gap-3 md:gap-4">
-            <button aria-label="Search" className="text-white hover:text-pink-200 transition-colors">
+            <button
+              aria-label="Search"
+              className="text-white hover:text-pink-200 transition-colors"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="22"
@@ -88,7 +96,11 @@ const NavBar = () => {
                 <path d="m21 21-4.3-4.3" />
               </svg>
             </button>
-            <Link href={'/WishList'} aria-label="Wishlist" className="text-white hover:text-pink-200 transition-colors">
+            <Link
+              href={"/WishList"}
+              aria-label="Wishlist"
+              className="text-white hover:text-pink-200 transition-colors"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="22"
@@ -147,11 +159,15 @@ const NavBar = () => {
                 <path d="M2 12h20" />
               </svg>
               <span className="text-sm font-medium">
-                {pathname.split('/')[1] === 'en' ? 'AR' : 'EN'}
+                {pathname.split("/")[1] === "en" ? "AR" : "EN"}
               </span>
             </div>
-            {/* Mobile Menu Button */} 
-            <button className="lg:hidden text-white" onClick={toggleSideBar} aria-label="Open menu">
+            {/* Mobile Menu Button */}
+            <button
+              className="lg:hidden text-white"
+              onClick={toggleSideBar}
+              aria-label="Open menu"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -172,7 +188,7 @@ const NavBar = () => {
           </div>
         </div>
       </nav>
-      {/* Mobile Sidebar */} 
+      {/* Mobile Sidebar */}
       <SideBarMobile open={open} setOpen={setOpen} />
       <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
