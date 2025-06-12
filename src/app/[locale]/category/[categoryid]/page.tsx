@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./categoryPage.css";
 import {
   Select,
