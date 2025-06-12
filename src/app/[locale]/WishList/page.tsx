@@ -163,15 +163,8 @@ const WishList = ({ params }: WishListProps) => {
        <div className="bg-[#8c0e71] h-12 flex items-center justify-center">
         <h1 className="text-white navFont">Wishlist</h1>
       </div>
-
-       {/* Page Header */}
-      <div className="page-header mb-8 md:mb-14">
-        <h1 className="text-center text-white text-2xl md:text-3xl">
-          {category?.toUpperCase()}
-        </h1>
-      </div>
       {/* Container */}
-      <div className="container px-4 md:px-6">
+      <div className="container px-4 md:px-6 mt-4 md:mt-6">
         {/* Sorting */}
         <div className="flex flex-col sm:flex-row justify-end items-start sm:items-center mb-4 gap-2 text-base md:text-xl">
           <Select onValueChange={handleSortChange}>
