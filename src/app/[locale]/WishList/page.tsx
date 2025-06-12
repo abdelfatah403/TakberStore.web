@@ -109,13 +109,9 @@ const sizes = [
 ];
 const brands = ["Dummy", "Dummy", "Dummy", "Dummy"];
 
-type WishListProps = {
-  params: Promise<{
-    locale: string;
-  }>;
-};
 
-const WishList = ({ params }: WishListProps) => {
+
+const WishList = () => {
   const [selectedSortMethod, setSelectedSortMethod] =
     useState<string>("Top Rated");
   const [values, setValues] = useState([0, 100]);
